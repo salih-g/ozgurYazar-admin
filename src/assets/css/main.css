@@ -8,3 +8,11 @@ body {
 		padding-top: 100px;
 	}
 }
+
+.notFound {
+	text-align: center;
+	margin-top: calc(50vh - 192px);
+}
+.notFound-title {
+	font-size: 96px;
+}

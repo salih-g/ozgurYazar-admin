@@ -49,7 +49,7 @@ const routes = [
 	// 		}
 	// 	},
 	// },
-	// { path: '*', component: import('../views/404.vue') },
+	{ path: '*', component: () => import('../views/404.vue') },
 ];
 
 const router = new VueRouter({
