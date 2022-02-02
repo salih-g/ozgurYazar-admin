@@ -39,14 +39,11 @@
 import { mapGetters, mapActions } from 'vuex';
 export default {
 	name: 'Navbar',
-	props: {},
 	computed: {
-		...mapGetters('authentication', ['isLoggedIn']),
+		...mapGetters('auth', ['isLoggedIn']),
 	},
 	methods: {
-		...mapActions('authentication', ['logout']),
+		...mapActions('auth', ['logout']),
 	},
 };
 </script>
-
-<style scoped></style>
