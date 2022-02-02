@@ -22,7 +22,6 @@
 				<label class="form-check-label" for="flexCheckDefault">Paylas </label>
 			</div>
 		</div>
-		<pre>{{ content }}</pre>
 	</div>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
 	<div class="new container">
 		<div>
+			<h1>Yeni icerik olustur.</h1>
 			<div class="published">
 				<input
 					class="form-check-input"
@@ -57,7 +58,7 @@
 
 <script>
 import { VueEditor } from 'vue2-editor';
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
 	name: 'New',
