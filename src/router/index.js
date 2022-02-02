@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '@/store';
-
-const isLoggedIn = store.getters['auth/isLoggedIn'];
+import authStore from '@/store/modules/auth';
 
 Vue.use(VueRouter);
 
@@ -57,6 +56,21 @@ const router = new VueRouter({
 	mode: 'history',
 	base: process.env.BASE_URL,
 	routes,
+});
+
+router.beforeEach((to, _, next) => {
+	store.dispatch('auth/fetchToken');
+	if (to.fullPath === '/') {
+		if (!authStore.state.token) {
+			next({ name: 'Login' });
+		}
+	}
+	if (to.fullPath === '/login') {
+		if (authStore.state.token) {
+			next({ name: 'Home' });
+		}
+	}
+	next();
 });
 
 export default router;
