@@ -30,16 +30,17 @@ export default {
 		},
 		async getContents({ state }) {
 			state.contentError = '';
-
-			return await axios()
-				.get('/contents')
-				.then((r) => {
-					state.contents = r.data;
-					return r.data;
-				})
-				.catch(() => {
-					state.contentError = 'Icerik olusturulamadi!';
-				});
+			if (state.contents.length === 0) {
+				return await axios()
+					.get('/contents')
+					.then((r) => {
+						state.contents = r.data;
+						return r.data;
+					})
+					.catch(() => {
+						state.contentError = 'Icerik olusturulamadi!';
+					});
+			}
 		},
 		getContentById(_, id) {
 			state.contentError = 'Icerik olusturulamadi!';

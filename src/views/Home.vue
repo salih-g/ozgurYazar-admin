@@ -5,7 +5,7 @@
 			<div class="row">
 				<div
 					class="col-lg-6 col-md-12 mb-4 mb-lg-0"
-					v-for="(content, index) in localContents"
+					v-for="(content, index) in contents"
 					:key="index"
 				>
 					<ItemCard :content="content" />
@@ -31,8 +31,10 @@ export default {
 		};
 	},
 	async created() {
-		this.localContents = await this.getContents();
-		console.log(this.localContents);
+		await this.getContents();
+	},
+	computed: {
+		...mapState('content', ['contents']),
 	},
 	methods: {
 		...mapActions('content', ['getContents']),
