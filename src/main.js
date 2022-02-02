@@ -1,12 +1,17 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import { sync } from 'vuex-router-sync';
 
-Vue.config.productionTip = false
+import './assets/css/bootstrap.css';
+import './assets/css/main.css';
+
+Vue.config.productionTip = false;
+sync(store, router);
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+	router,
+	store,
+	render: (h) => h(App),
+}).$mount('#app');
