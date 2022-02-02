@@ -22,6 +22,7 @@ export default {
 					state.contentError = 'Icerik olusturulamadi!';
 				});
 		},
+
 		async getContents({ state }) {
 			state.contentError = '';
 			return await axios()
@@ -34,6 +35,7 @@ export default {
 					state.contentError = 'Icerik olusturulamadi!';
 				});
 		},
+
 		getContentById({ state }, id) {
 			state.contentError = 'Icerik olusturulamadi!';
 
@@ -52,6 +54,7 @@ export default {
 					state.contentError = 'Icerik olusturulamadi!';
 				});
 		},
+
 		async createSection({ state }, section) {
 			state.contentError = '';
 
@@ -65,6 +68,31 @@ export default {
 				.post(
 					`/admin/contents/createSection/${section._id}`,
 					{ title: section.sectionName, published: section.published },
+					config,
+				)
+				.then((r) => {
+					return r.data;
+				})
+				.catch(() => {
+					state.contentError = 'Icerik olusturulamadi!';
+				});
+		},
+
+		async updateSection({ state }, data) {
+			state.contentError = '';
+
+			const config = {
+				headers: {
+					Authorization: 'Bearer ' + state.token,
+				},
+			};
+
+			console.log(data);
+
+			return await axios()
+				.put(
+					`/admin/contents/updateContent/${data._id}`,
+					{ title: data.title, desc: data.desc, published: data.published },
 					config,
 				)
 				.then((r) => {

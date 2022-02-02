@@ -8,6 +8,7 @@
 						type="checkbox"
 						id="flexCheckDefault"
 						:checked="content.published"
+						v-model="content.published"
 					/>
 					/>
 
@@ -55,8 +56,11 @@
 							Yeni bölüm ekle
 						</button>
 					</form>
-					<button class="btn btn-lg btn-primary" @click.prevent="createContent">
-						Kitabi kaydet
+					<button
+						class="btn btn-lg btn-primary"
+						@click.prevent="updateSectionHandler"
+					>
+						Kitabi Guncelle
 					</button>
 				</div>
 			</div>
@@ -108,7 +112,11 @@ export default {
 	},
 	computed: {},
 	methods: {
-		...mapActions('content', ['getContentById', 'createSection']),
+		...mapActions('content', [
+			'getContentById',
+			'createSection',
+			'updateSection',
+		]),
 
 		async createSectionHandler() {
 			this.content = await this.createSection({
@@ -116,6 +124,16 @@ export default {
 				sectionName: this.content.sectionName,
 				published: this.content.published,
 			});
+		},
+		async updateSectionHandler() {
+			console.log(this.content);
+			this.content = await this.updateSection({
+				_id: this.content._id,
+				title: this.content.title,
+				desc: this.content.desc,
+				published: this.content.published,
+			});
+			console.log(this.content);
 		},
 	},
 };
