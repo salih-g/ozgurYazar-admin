@@ -4,7 +4,7 @@
 			<fieldset>
 				<div
 					class="alert alert-dismissible alert-danger"
-					v-if="loginError != null"
+					v-if="loginError != ''"
 				>
 					<strong>{{ loginError }}</strong>
 				</div>

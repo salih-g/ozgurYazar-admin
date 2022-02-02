@@ -1,29 +1,62 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import store from '@/store';
 
-Vue.use(VueRouter)
+const isLoggedIn = store.getters['auth/isLoggedIn'];
+
+Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+	{
+		path: '/',
+		name: 'Home',
+		component: () => import('../views/Home.vue'),
+	},
+	{
+		path: '/login',
+		name: 'Login',
+		component: () => import('../views/Login.vue'),
+	},
+	// {
+	// 	path: '/new',
+	// 	name: 'New',
+	// 	component: () => {
+	// 		if (isLoggedIn) {
+	// 			return import('../views/create/New.vue');
+	// 		} else {
+	// 			router.push('login');
+	// 		}
+	// 	},
+	// },
+	// {
+	// 	path: '/edit/:id',
+	// 	name: 'Edit',
+	// 	component: () => {
+	// 		if (isLoggedIn) {
+	// 			return import('../views/edit/Edit.vue');
+	// 		} else {
+	// 			router.push('login');
+	// 		}
+	// 	},
+	// },
+	// {
+	// 	path: '/new/:id',
+	// 	name: 'CreateSection',
+	// 	component: () => {
+	// 		if (isLoggedIn) {
+	// 			return import('../views/create/CreateSection.vue');
+	// 		} else {
+	// 			router.push('login');
+	// 		}
+	// 	},
+	// },
+	// { path: '*', component: import('../views/404.vue') },
+];
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
+	mode: 'history',
+	base: process.env.BASE_URL,
+	routes,
+});
 
-export default router
+export default router;

@@ -22,17 +22,20 @@ export default {
 					password: user.password,
 				})
 				.then(({ data }) => {
-					state.token = data.token;
-					localStorage.setItem('token', data.token);
-					if (data.token !== null) router.push({ name: 'Home' });
+					if (data.token !== null) {
+						state.token = data.token;
+						localStorage.setItem('token', data.token);
+						router.push({ name: 'Home' });
+					}
 				})
 				.catch((err) => {
-					console.log(err.message || err);
+					console.error(err.message || err);
 					state.loginError = 'Hatali giris!';
 				});
 		},
-		logout() {
+		logout({ state }) {
 			state.token = null;
+			localStorage.setItem('token', '');
 			router.push({ name: 'Login' });
 		},
 	},
