@@ -21,17 +21,11 @@ const routes = [
 		name: 'New',
 		component: () => import('../views/new/New.vue'),
 	},
-	// {
-	// 	path: '/edit/:id',
-	// 	name: 'Edit',
-	// 	component: () => {
-	// 		if (isLoggedIn) {
-	// 			return import('../views/edit/Edit.vue');
-	// 		} else {
-	// 			router.push('login');
-	// 		}
-	// 	},
-	// },
+	{
+		path: '/edit/:id',
+		name: 'Edit',
+		component: () => import('../views/edit/Edit.vue'),
+	},
 	// {
 	// 	path: '/new/:id',
 	// 	name: 'CreateSection',
@@ -54,7 +48,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, _, next) => {
 	store.dispatch('auth/fetchToken');
-	if (to.fullPath === '/') {
+	if (
+		to.fullPath === '/' ||
+		to.fullPath === '/new' ||
+		to.fullPath === '/edit/:id'
+	) {
 		if (!authStore.state.token) {
 			next({ name: 'Login' });
 		}
@@ -64,11 +62,7 @@ router.beforeEach((to, _, next) => {
 			next({ name: 'Home' });
 		}
 	}
-	if (to.fullPath === '/new') {
-		if (!authStore.state.token) {
-			next({ name: 'Login' });
-		}
-	}
+
 	next();
 });
 

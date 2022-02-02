@@ -34,7 +34,7 @@ export default {
 					state.contentError = 'Icerik olusturulamadi!';
 				});
 		},
-		getContentById(_, id) {
+		getContentById({ state }, id) {
 			state.contentError = 'Icerik olusturulamadi!';
 
 			const config = {
@@ -49,16 +49,29 @@ export default {
 					return r;
 				})
 				.catch(() => {
-					commit('setContentError', 'Icerik olusturulamadi.');
+					state.contentError = 'Icerik olusturulamadi!';
 				});
 		},
-		createSection({ commit }, id) {
-			commit('setContentError', null);
+		createSection({ state }, section) {
+			state.contentError = '';
+
 			const config = {
 				headers: {
 					Authorization: 'Bearer ' + state.token,
 				},
 			};
+
+			console.log(section);
+			return axios()
+				.post(
+					`/admin/contents/createSection/${section._id}`,
+					{ title: section.sectionName, published: section.published },
+					config,
+				)
+				.then(() => {})
+				.catch(() => {
+					state.contentError = 'Icerik olusturulamadi!';
+				});
 		},
 	},
 };
