@@ -46,12 +46,13 @@
 							type="text"
 							class="form-control mb-4 w-30"
 							placeholder="İsimsiz bölüm"
-							v-model="content.sectionName"
+							v-model="sectionName"
 							required
 						/>
 						<button
 							class="btn btn-lg btn-primary mb-4"
 							@click.prevent="createSectionHandler()"
+							:disabled="!sectionName"
 						>
 							Yeni bölüm ekle
 						</button>
@@ -77,10 +78,11 @@
 										type="checkbox"
 										id="flexCheckDefault"
 										:checked="section.published"
+										v-model="section.published"
 									/>
 								</div>
 							</div>
-							<router-link :to="`/new/${section._id}`" class="link">
+							<router-link :to="`/sections/${section._id}`" class="link">
 								<p class="title">{{ section.title }}</p>
 							</router-link>
 						</div>
@@ -103,6 +105,7 @@ export default {
 	data() {
 		return {
 			content: {},
+			sectionName: '',
 		};
 	},
 	created() {
@@ -119,9 +122,10 @@ export default {
 		]),
 
 		async createSectionHandler() {
+			console.log(this.content);
 			this.content = await this.createSection({
 				_id: this.content._id,
-				sectionName: this.content.sectionName,
+				sectionName: this.sectionName,
 				published: this.content.published,
 			});
 		},
@@ -132,6 +136,7 @@ export default {
 				title: this.content.title,
 				desc: this.content.desc,
 				published: this.content.published,
+				sections: this.content.sections,
 			});
 			console.log(this.content);
 		},

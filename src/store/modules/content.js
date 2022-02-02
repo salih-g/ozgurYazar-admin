@@ -87,12 +87,15 @@ export default {
 				},
 			};
 
-			console.log(data);
-
 			return await axios()
 				.put(
 					`/admin/contents/updateContent/${data._id}`,
-					{ title: data.title, desc: data.desc, published: data.published },
+					{
+						title: data.title,
+						desc: data.desc,
+						published: data.published,
+						sections: data.sections,
+					},
 					config,
 				)
 				.then((r) => {
