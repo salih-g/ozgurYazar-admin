@@ -52,7 +52,7 @@ export default {
 					state.contentError = 'Icerik olusturulamadi!';
 				});
 		},
-		createSection({ state }, section) {
+		async createSection({ state }, section) {
 			state.contentError = '';
 
 			const config = {
@@ -61,14 +61,15 @@ export default {
 				},
 			};
 
-			console.log(section);
-			return axios()
+			return await axios()
 				.post(
 					`/admin/contents/createSection/${section._id}`,
 					{ title: section.sectionName, published: section.published },
 					config,
 				)
-				.then(() => {})
+				.then((r) => {
+					return r.data;
+				})
 				.catch(() => {
 					state.contentError = 'Icerik olusturulamadi!';
 				});

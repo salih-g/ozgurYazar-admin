@@ -50,13 +50,7 @@
 						/>
 						<button
 							class="btn btn-lg btn-primary mb-4"
-							@click.prevent="
-								createSection({
-									_id: content._id,
-									sectionName: content.sectionName,
-									published: content.published,
-								})
-							"
+							@click.prevent="createSectionHandler()"
 						>
 							Yeni bölüm ekle
 						</button>
@@ -115,6 +109,14 @@ export default {
 	computed: {},
 	methods: {
 		...mapActions('content', ['getContentById', 'createSection']),
+
+		async createSectionHandler() {
+			this.content = await this.createSection({
+				_id: this.content._id,
+				sectionName: this.content.sectionName,
+				published: this.content.published,
+			});
+		},
 	},
 };
 </script>
