@@ -16,17 +16,11 @@ const routes = [
 		name: 'Login',
 		component: () => import('../views/login/Login.vue'),
 	},
-	// {
-	// 	path: '/new',
-	// 	name: 'New',
-	// 	component: () => {
-	// 		if (isLoggedIn) {
-	// 			return import('../views/create/New.vue');
-	// 		} else {
-	// 			router.push('login');
-	// 		}
-	// 	},
-	// },
+	{
+		path: '/new',
+		name: 'New',
+		component: () => import('../views/new/New.vue'),
+	},
 	// {
 	// 	path: '/edit/:id',
 	// 	name: 'Edit',
@@ -68,6 +62,11 @@ router.beforeEach((to, _, next) => {
 	if (to.fullPath === '/login') {
 		if (authStore.state.token) {
 			next({ name: 'Home' });
+		}
+	}
+	if (to.fullPath === '/new') {
+		if (!authStore.state.token) {
+			next({ name: 'Login' });
 		}
 	}
 	next();

@@ -10,12 +10,6 @@ export default {
 	actions: {
 		createContent({ state }, data) {
 			state.contentError = '';
-			const content = {
-				title: state.createContent.title,
-				desc: state.createContent.desc,
-				published: state.createContent.published,
-				sectionName: state.createContent.sectionName,
-			};
 			const config = {
 				headers: {
 					Authorization: 'Bearer ' + state.token,
@@ -30,17 +24,15 @@ export default {
 		},
 		async getContents({ state }) {
 			state.contentError = '';
-			if (state.contents.length === 0) {
-				return await axios()
-					.get('/contents')
-					.then((r) => {
-						state.contents = r.data;
-						return r.data;
-					})
-					.catch(() => {
-						state.contentError = 'Icerik olusturulamadi!';
-					});
-			}
+			return await axios()
+				.get('/contents')
+				.then((r) => {
+					state.contents = r.data;
+					return r.data;
+				})
+				.catch(() => {
+					state.contentError = 'Icerik olusturulamadi!';
+				});
 		},
 		getContentById(_, id) {
 			state.contentError = 'Icerik olusturulamadi!';

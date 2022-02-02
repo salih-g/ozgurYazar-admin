@@ -25,11 +25,6 @@ export default {
 	components: {
 		ItemCard,
 	},
-	data() {
-		return {
-			localContents: [],
-		};
-	},
 	async created() {
 		await this.getContents();
 	},
