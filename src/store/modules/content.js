@@ -123,7 +123,7 @@ export default {
 				},
 			};
 
-			return axios()
+			return await axios()
 				.patch(
 					`/admin/contents/sections/${data._id}`,
 					{
@@ -150,7 +150,7 @@ export default {
 			};
 
 			return await axios()
-				.delete(`/admin/contents/sections/${data.id}`, config)
+				.delete(`/admin/contents/sections/${_id}`, config)
 				.then((r) => {
 					return r.data;
 				})

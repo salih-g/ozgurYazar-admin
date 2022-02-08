@@ -93,7 +93,11 @@
 								<p class="title">{{ section.title }}</p>
 							</router-link>
 						</div>
-						<button type="button" class="btn btn-danger">
+						<button
+							type="button"
+							class="btn btn-danger"
+							@click="deleteSectionHandler(section._id)"
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="16"
@@ -148,15 +152,17 @@ export default {
 			'createSection',
 			'updateContent',
 			'updateSection',
+			'deleteSection',
 		]),
 
 		async createSectionHandler() {
 			this.content = await this.createSection({
 				_id: this.content._id,
 				sectionName: this.sectionName,
-				published: this.content.published,
+				published: false,
 			});
 		},
+
 		async updateContentHandler() {
 			this.content = await this.updateContent({
 				_id: this.content._id,
@@ -168,6 +174,14 @@ export default {
 
 		async updateSectionHandler(_id, published, title) {
 			await this.updateSection({ _id, published, title });
+		},
+
+		async deleteSectionHandler(_id) {
+			await this.deleteSection(_id).then(() =>
+				this.getContentById(this.$route.params.id).then((r) => {
+					this.content = r.data;
+				}),
+			);
 		},
 	},
 };
