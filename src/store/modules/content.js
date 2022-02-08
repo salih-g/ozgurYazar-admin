@@ -38,7 +38,6 @@ export default {
 				.get('/admin/contents', config)
 				.then((r) => {
 					state.contents = r.data;
-					console.log(r.data);
 					return r.data;
 				})
 				.catch(() => {
@@ -124,14 +123,34 @@ export default {
 				},
 			};
 
-			return await axios()
+			return axios()
 				.patch(
-					`/admin/contents/sections/${data.id}`,
+					`/admin/contents/sections/${data._id}`,
 					{
+						title: data.title,
 						published: data.published,
 					},
 					config,
 				)
+				.then((r) => {
+					return r.data;
+				})
+				.catch(() => {
+					state.contentError = 'Icerik Degistirilemedi!';
+				});
+		},
+
+		async deleteSection({ state }, _id) {
+			state.contentError = '';
+
+			const config = {
+				headers: {
+					Authorization: 'Bearer ' + state.token,
+				},
+			};
+
+			return await axios()
+				.delete(`/admin/contents/sections/${data.id}`, config)
 				.then((r) => {
 					return r.data;
 				})

@@ -80,7 +80,11 @@
 										:checked="section.published"
 										v-model="section.published"
 										@click="
-											updateSectionHandler(section._id, section.published)
+											updateSectionHandler(
+												section._id,
+												!section.published,
+												section.title,
+											)
 										"
 									/>
 								</div>
@@ -162,8 +166,8 @@ export default {
 			});
 		},
 
-		async updateSectionHandler(id, published) {
-			await this.updateSection({ id, published });
+		async updateSectionHandler(_id, published, title) {
+			await this.updateSection({ _id, published, title });
 		},
 	},
 };
