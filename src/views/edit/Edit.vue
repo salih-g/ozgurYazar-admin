@@ -1,7 +1,7 @@
 <template>
 	<div class="edit container">
 		<div class="row">
-			<div class="">
+			<div>
 				<div class="published">
 					<input
 						class="form-check-input"
@@ -79,6 +79,9 @@
 										id="flexCheckDefault"
 										:checked="section.published"
 										v-model="section.published"
+										@click="
+											updateSectionHandler(section._id, section.published)
+										"
 									/>
 								</div>
 							</div>
@@ -140,6 +143,7 @@ export default {
 			'getContentById',
 			'createSection',
 			'updateContent',
+			'updateSection',
 		]),
 
 		async createSectionHandler() {
@@ -156,6 +160,10 @@ export default {
 				desc: this.content.desc,
 				published: this.content.published,
 			});
+		},
+
+		async updateSectionHandler(id, published) {
+			await this.updateSection({ id, published });
 		},
 	},
 };

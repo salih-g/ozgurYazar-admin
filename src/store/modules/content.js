@@ -114,5 +114,30 @@ export default {
 					state.contentError = 'Icerik olusturulamadi!';
 				});
 		},
+
+		async updateSection({ state }, data) {
+			state.contentError = '';
+
+			const config = {
+				headers: {
+					Authorization: 'Bearer ' + state.token,
+				},
+			};
+
+			return await axios()
+				.patch(
+					`/admin/contents/sections/${data.id}`,
+					{
+						published: data.published,
+					},
+					config,
+				)
+				.then((r) => {
+					return r.data;
+				})
+				.catch(() => {
+					state.contentError = 'Icerik Silinemedi!';
+				});
+		},
 	},
 };
