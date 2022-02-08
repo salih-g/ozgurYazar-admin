@@ -1,4 +1,5 @@
 import axios from '../../api/axios';
+import router from '../../router';
 export default {
 	namespaced: true,
 	state: {
@@ -18,6 +19,7 @@ export default {
 
 			return axios()
 				.post('/admin/contents', data, config)
+				.then(() => router.push('/'))
 				.catch(() => {
 					state.contentError = 'Icerik olusturulamadi!';
 				});
@@ -25,10 +27,18 @@ export default {
 
 		async getContents({ state }) {
 			state.contentError = '';
+
+			const config = {
+				headers: {
+					Authorization: 'Bearer ' + state.token,
+				},
+			};
+
 			return await axios()
-				.get('/contents')
+				.get('/admin/contents', config)
 				.then((r) => {
 					state.contents = r.data;
+					console.log(r.data);
 					return r.data;
 				})
 				.catch(() => {

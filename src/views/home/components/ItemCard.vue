@@ -11,16 +11,6 @@
 				</div>
 				<p class="desc" v-html="content.desc"></p>
 			</router-link>
-			<div class="published">
-				<input
-					class="form-check-input"
-					type="checkbox"
-					id="flexCheckDefault"
-					:checked="content.published"
-				/>
-				/>
-				<label class="form-check-label" for="flexCheckDefault">Paylas </label>
-			</div>
 		</div>
 	</div>
 </template>

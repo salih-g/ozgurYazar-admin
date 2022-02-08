@@ -22,7 +22,7 @@ export default {
 			state.loginError = '';
 
 			return axios()
-				.post('/admin/auth/login', {
+				.post('/auth/login', {
 					username: user.username,
 					password: user.password,
 				})

@@ -1,6 +1,6 @@
 <template>
 	<div class="notFound">
-		<h1 class="notFound-title">Page not found</h1>
+		<h1 class="notFound-title">Sayfa bulunamadi</h1>
 	</div>
 </template>
 

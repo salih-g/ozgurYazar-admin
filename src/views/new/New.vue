@@ -12,7 +12,7 @@
 				/>
 				<label class="form-check-label" for="flexCheckDefault"> Paylas </label>
 			</div>
-			<div class="titleDesc">
+			<div class="title-desc">
 				<div class="title">
 					<label class="col-form-label col-form-label-lg mt-4" for="inputLarge"
 						>Kitap ismi:</label
@@ -35,7 +35,7 @@
 						v-model="newContent.desc"
 					/>
 				</div>
-				<form class="newSection mb-4">
+				<form class="new-section mb-4">
 					<label class="col-form-label" for="inputDefault">Bölüm ismi:</label>
 					<input
 						type="text"
@@ -49,7 +49,7 @@
 					class="btn btn-lg btn-primary"
 					@click.prevent="createContent(newContent)"
 				>
-					Kitabı kaydet
+					Kitabi kaydet
 				</button>
 			</div>
 		</div>
@@ -98,10 +98,10 @@ export default {
 .form-check-label {
 	margin-left: 20px;
 }
-.titleDesc {
+.title-desc {
 	text-align: left;
 }
-.newSection {
+.new-section {
 	display: flex;
 	flex-direction: column;
 }
