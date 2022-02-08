@@ -76,7 +76,7 @@ export default {
 
 			return await axios()
 				.post(
-					`/admin/contents/createSection/${section._id}`,
+					`/admin/contents/sections/${section._id}`,
 					{ title: section.sectionName, published: section.published },
 					config,
 				)
@@ -88,7 +88,7 @@ export default {
 				});
 		},
 
-		async updateSection({ state }, data) {
+		async updateContent({ state }, data) {
 			state.contentError = '';
 
 			const config = {
@@ -98,13 +98,12 @@ export default {
 			};
 
 			return await axios()
-				.put(
-					`/admin/contents/updateContent/${data._id}`,
+				.patch(
+					`/admin/contents/${data._id}`,
 					{
 						title: data.title,
 						desc: data.desc,
 						published: data.published,
-						sections: data.sections,
 					},
 					config,
 				)

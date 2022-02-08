@@ -17,7 +17,7 @@
 					</label>
 				</div>
 
-				<div class="titleDesc">
+				<div class="title-desc">
 					<div class="title">
 						<label
 							class="col-form-label col-form-label-lg mt-4"
@@ -40,7 +40,7 @@
 						>
 						<VueEditor class="editor" id="desc-editor" v-model="content.desc" />
 					</div>
-					<form class="newSection mb-4">
+					<form class="new-section mb-4">
 						<label class="col-form-label" for="inputDefault">Bölüm ismi:</label>
 						<input
 							type="text"
@@ -59,7 +59,7 @@
 					</form>
 					<button
 						class="btn btn-lg btn-primary"
-						@click.prevent="updateSectionHandler"
+						@click.prevent="updateContentHandler"
 					>
 						Kitabi Guncelle
 					</button>
@@ -139,7 +139,7 @@ export default {
 		...mapActions('content', [
 			'getContentById',
 			'createSection',
-			'updateSection',
+			'updateContent',
 		]),
 
 		async createSectionHandler() {
@@ -149,13 +149,12 @@ export default {
 				published: this.content.published,
 			});
 		},
-		async updateSectionHandler() {
-			this.content = await this.updateSection({
+		async updateContentHandler() {
+			this.content = await this.updateContent({
 				_id: this.content._id,
 				title: this.content.title,
 				desc: this.content.desc,
 				published: this.content.published,
-				sections: this.content.sections,
 			});
 		},
 	},
@@ -178,10 +177,10 @@ export default {
 .form-check-label {
 	margin-left: 20px;
 }
-.titleDesc {
+.title-desc {
 	text-align: left;
 }
-.newSection {
+.new-section {
 	display: flex;
 	flex-direction: column;
 }
