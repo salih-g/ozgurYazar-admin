@@ -2,4 +2,5 @@
 
 ## Todos:
 
+- [x] Date functionality
 - [ ] Page functionality
