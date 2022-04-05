@@ -46,7 +46,13 @@ const routes = [
 		},
 		component: () => import('../views/sectionEdit/SectionEdit.vue'),
 	},
-	{ path: '*', component: () => import('../views/404.vue') },
+	{
+		path: '*',
+		meta: {
+			requiresAuth: true,
+		},
+		component: () => import('../views/404.vue'),
+	},
 ];
 
 const router = new VueRouter({

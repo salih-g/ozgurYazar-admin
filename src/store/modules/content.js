@@ -11,9 +11,10 @@ export default {
 	actions: {
 		createContent({ state }, data) {
 			state.contentError = '';
+
 			const config = {
 				headers: {
-					Authorization: 'Bearer ' + state.token,
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
 			};
 
@@ -50,7 +51,7 @@ export default {
 
 			const config = {
 				headers: {
-					Authorization: 'Bearer ' + state.token,
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
 			};
 
@@ -69,7 +70,7 @@ export default {
 
 			const config = {
 				headers: {
-					Authorization: 'Bearer ' + state.token,
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
 			};
 
@@ -92,7 +93,7 @@ export default {
 
 			const config = {
 				headers: {
-					Authorization: 'Bearer ' + state.token,
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
 			};
 
@@ -119,7 +120,7 @@ export default {
 
 			const config = {
 				headers: {
-					Authorization: 'Bearer ' + state.token,
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
 			};
 
@@ -145,7 +146,7 @@ export default {
 
 			const config = {
 				headers: {
-					Authorization: 'Bearer ' + state.token,
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
 			};
 
