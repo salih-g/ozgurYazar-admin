@@ -1,5 +1,5 @@
-import axios from '../../api/axios';
-import router from '../../router';
+import api from '../../api';
+
 export default {
 	namespaced: true,
 	state: {
@@ -8,156 +8,48 @@ export default {
 		contentById: {},
 		contentError: '',
 	},
+
 	actions: {
 		createContent({ state }, data) {
 			state.contentError = '';
 
-			const config = {
-				headers: {
-					Authorization: 'Bearer ' + localStorage.getItem('token'),
-				},
-			};
-
-			return axios()
-				.post('/admin/contents', data, config)
-				.then(() => router.push('/'))
-				.catch(() => {
-					state.contentError = 'Icerik olusturulamadi!';
-				});
+			return api.createContent(state, data);
 		},
 
 		async getContents({ state }) {
 			state.contentError = '';
 
-			const config = {
-				headers: {
-					Authorization: 'Bearer ' + localStorage.getItem('token'),
-				},
-			};
-
-			return await axios()
-				.get('/admin/contents', config)
-				.then((r) => {
-					state.contents = r.data;
-					return r.data;
-				})
-				.catch(() => {
-					state.contentError = 'Icerik olusturulamadi!';
-				});
+			return api.fetchContents(state);
 		},
 
-		getContentById({ state }, id) {
+		async getContentById({ state }, id) {
 			state.contentError = 'Icerik olusturulamadi!';
 
-			const config = {
-				headers: {
-					Authorization: 'Bearer ' + localStorage.getItem('token'),
-				},
-			};
-
-			return axios()
-				.get(`/admin/contents/${id}`, config)
-				.then((r) => {
-					return r;
-				})
-				.catch(() => {
-					state.contentError = 'Icerik olusturulamadi!';
-				});
+			return await api.fetchContentById(state, id);
 		},
 
 		async createSection({ state }, section) {
 			state.contentError = '';
 
-			const config = {
-				headers: {
-					Authorization: 'Bearer ' + localStorage.getItem('token'),
-				},
-			};
-
-			return await axios()
-				.post(
-					`/admin/contents/sections/${section._id}`,
-					{ title: section.sectionName, published: section.published },
-					config,
-				)
-				.then((r) => {
-					return r.data;
-				})
-				.catch(() => {
-					state.contentError = 'Icerik olusturulamadi!';
-				});
+			return await api.createSection(state, section);
 		},
 
 		async updateContent({ state }, data) {
 			state.contentError = '';
 
-			const config = {
-				headers: {
-					Authorization: 'Bearer ' + localStorage.getItem('token'),
-				},
-			};
-
-			return await axios()
-				.patch(
-					`/admin/contents/${data._id}`,
-					{
-						title: data.title,
-						desc: data.desc,
-						published: data.published,
-					},
-					config,
-				)
-				.then((r) => {
-					return r.data;
-				})
-				.catch(() => {
-					state.contentError = 'Icerik olusturulamadi!';
-				});
+			return await api.updateContent(state, data);
 		},
 
 		async updateSection({ state }, data) {
 			state.contentError = '';
 
-			const config = {
-				headers: {
-					Authorization: 'Bearer ' + localStorage.getItem('token'),
-				},
-			};
-
-			return await axios()
-				.patch(
-					`/admin/contents/sections/${data._id}`,
-					{
-						title: data.title,
-						published: data.published,
-					},
-					config,
-				)
-				.then((r) => {
-					return r.data;
-				})
-				.catch(() => {
-					state.contentError = 'Icerik Degistirilemedi!';
-				});
+			return await api.updateSection(state, data);
 		},
 
 		async deleteSection({ state }, _id) {
 			state.contentError = '';
 
-			const config = {
-				headers: {
-					Authorization: 'Bearer ' + localStorage.getItem('token'),
-				},
-			};
-
-			return await axios()
-				.delete(`/admin/contents/sections/${_id}`, config)
-				.then((r) => {
-					return r.data;
-				})
-				.catch(() => {
-					state.contentError = 'Icerik Silinemedi!';
-				});
+			return await api.deleteSection(state, _id);
 		},
 	},
 };

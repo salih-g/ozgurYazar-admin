@@ -1,5 +1,5 @@
+import api from '../../api';
 import router from '../../router';
-import axios from '../../api/axios';
 
 export default {
 	namespaced: true,
@@ -16,28 +16,15 @@ export default {
 		login({ state }, user) {
 			state.loginError = '';
 
-			return axios()
-				.post('/auth/login', {
-					username: user.username,
-					password: user.password,
-				})
-				.then(({ data }) => {
-					if (data.token !== null) {
-						state.token = data.token;
-						localStorage.setItem('token', data.token);
-						router.push({ name: 'Home' });
-					}
-				})
-				.catch((err) => {
-					console.error(err.message || err);
-					state.loginError = 'Hatali giris!';
-				});
+			return api.login(state, user);
 		},
+
 		logout({ state }) {
 			state.token = null;
 			localStorage.setItem('token', '');
 			router.push({ name: 'Login' });
 		},
+
 		fetchToken({ state }) {
 			state.token = localStorage.getItem('token');
 		},

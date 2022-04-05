@@ -140,8 +140,8 @@ export default {
 			sectionName: '',
 		};
 	},
-	created() {
-		this.getContentById(this.$route.params.id).then((r) => {
+	async created() {
+		await this.getContentById(this.$route.params.id).then((r) => {
 			this.content = r.data;
 		});
 	},
@@ -177,10 +177,11 @@ export default {
 		},
 
 		async deleteSectionHandler(_id) {
-			await this.deleteSection(_id).then(() =>
-				this.getContentById(this.$route.params.id).then((r) => {
-					this.content = r.data;
-				}),
+			await this.deleteSection(_id).then(
+				async () =>
+					await this.getContentById(this.$route.params.id).then((r) => {
+						this.content = r.data;
+					}),
 			);
 		},
 	},
