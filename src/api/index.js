@@ -157,4 +157,18 @@ export default {
 				state.contentError = 'Icerik Silinemedi!';
 			});
 	},
+
+	fetchSectionById: async (id) => {
+		const config = {
+			headers: {
+				Authorization: 'Bearer ' + localStorage.getItem('token'),
+			},
+		};
+
+		return await axios()
+			.get(`/admin/contents/sections/${id}`, config)
+			.then((r) => {
+				return r;
+			});
+	},
 };
