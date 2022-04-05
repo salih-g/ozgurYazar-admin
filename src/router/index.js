@@ -26,17 +26,11 @@ const routes = [
 		name: 'Edit',
 		component: () => import('../views/edit/Edit.vue'),
 	},
-	// {
-	// 	path: '/new/:id',
-	// 	name: 'CreateSection',
-	// 	component: () => {
-	// 		if (isLoggedIn) {
-	// 			return import('../views/create/CreateSection.vue');
-	// 		} else {
-	// 			router.push('login');
-	// 		}
-	// 	},
-	// },
+	{
+		path: '/sections/:id',
+		name: 'Section',
+		component: () => import('../views/sectionEdit/SectionEdit.vue'),
+	},
 	{ path: '*', component: () => import('../views/404.vue') },
 ];
 
@@ -51,7 +45,8 @@ router.beforeEach((to, _, next) => {
 	if (
 		to.fullPath === '/' ||
 		to.fullPath === '/new' ||
-		to.fullPath === '/edit/:id'
+		to.fullPath === '/edit/:id' ||
+		to.fullPath === '/sections/:id'
 	) {
 		if (!authStore.state.token) {
 			next({ name: 'Login' });

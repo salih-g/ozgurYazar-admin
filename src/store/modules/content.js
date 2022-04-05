@@ -3,7 +3,7 @@ import router from '../../router';
 export default {
 	namespaced: true,
 	state: {
-		token: localStorage.getItem('token') || '',
+		token: localStorage.getItem('token') || null,
 		contents: [],
 		contentById: {},
 		contentError: '',
@@ -30,7 +30,7 @@ export default {
 
 			const config = {
 				headers: {
-					Authorization: 'Bearer ' + state.token,
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
 			};
 

@@ -12,11 +12,6 @@ export default {
 			return !!state.token;
 		},
 	},
-	mutations: {
-		updateToken: (state, token) => {
-			state.token = token;
-		},
-	},
 	actions: {
 		login({ state }, user) {
 			state.loginError = '';
@@ -43,8 +38,8 @@ export default {
 			localStorage.setItem('token', '');
 			router.push({ name: 'Login' });
 		},
-		fetchToken({ commit }) {
-			commit('updateToken', localStorage.getItem('token'));
+		fetchToken({ state }) {
+			state.token = localStorage.getItem('token');
 		},
 	},
 };
