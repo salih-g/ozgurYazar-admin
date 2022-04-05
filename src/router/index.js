@@ -9,26 +9,41 @@ const routes = [
 	{
 		path: '/',
 		name: 'Home',
+		meta: {
+			requiresAuth: true,
+		},
 		component: () => import('../views/Home.vue'),
 	},
 	{
 		path: '/login',
 		name: 'Login',
+		meta: {
+			requiresAuth: false,
+		},
 		component: () => import('../views/login/Login.vue'),
 	},
 	{
 		path: '/new',
 		name: 'New',
+		meta: {
+			requiresAuth: true,
+		},
 		component: () => import('../views/new/New.vue'),
 	},
 	{
 		path: '/edit/:id',
 		name: 'Edit',
+		meta: {
+			requiresAuth: true,
+		},
 		component: () => import('../views/edit/Edit.vue'),
 	},
 	{
 		path: '/sections/:id',
 		name: 'Section',
+		meta: {
+			requiresAuth: true,
+		},
 		component: () => import('../views/sectionEdit/SectionEdit.vue'),
 	},
 	{ path: '*', component: () => import('../views/404.vue') },
@@ -41,24 +56,11 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, _, next) => {
-	store.dispatch('auth/fetchToken');
-	if (
-		to.fullPath === '/' ||
-		to.fullPath === '/new' ||
-		to.fullPath === '/edit/:id' ||
-		to.fullPath === '/sections/:id'
-	) {
-		if (!authStore.state.token) {
-			next({ name: 'Login' });
-		}
-	}
-	if (to.fullPath === '/login') {
-		if (authStore.state.token) {
-			next({ name: 'Home' });
-		}
-	}
+	const authenticatedUser = localStorage.getItem('token');
+	const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
 
-	next();
+	if (requiresAuth && !authenticatedUser) next({ name: 'Login' });
+	else next();
 });
 
 export default router;
