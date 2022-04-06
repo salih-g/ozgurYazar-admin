@@ -130,6 +130,7 @@ export default {
 				{
 					title: data.title,
 					published: data.published,
+					content: data.content || '',
 				},
 				config,
 			)
