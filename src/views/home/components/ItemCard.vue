@@ -7,9 +7,11 @@
 			>
 				<div class="d-flex w-100 justify-content-between">
 					<h5>{{ content.title }}</h5>
+
 					<small>{{ new Date(content.createdAt).toLocaleDateString() }} </small>
 				</div>
 				<p class="desc" v-html="content.desc"></p>
+				<small>{{ content.published ? 'Paylaşıldı' : 'Paylaşılmadı' }} </small>
 			</router-link>
 		</div>
 	</div>

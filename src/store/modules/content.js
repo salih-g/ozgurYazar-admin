@@ -28,16 +28,21 @@ export default {
 			return await api.fetchContentById(state, id);
 		},
 
-		async createSection({ state }, section) {
-			state.contentError = '';
-
-			return await api.createSection(state, section);
-		},
-
 		async updateContent({ state }, data) {
 			state.contentError = '';
 
 			return await api.updateContent(state, data);
+		},
+		async deleteContent({ state }, _id) {
+			state.contentError = '';
+
+			return await api.deleteBook(state, _id);
+		},
+
+		async createSection({ state }, section) {
+			state.contentError = '';
+
+			return await api.createSection(state, section);
 		},
 
 		async updateSection({ state }, data) {

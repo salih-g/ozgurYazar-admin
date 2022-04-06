@@ -92,6 +92,20 @@ export default {
 			});
 	},
 
+	fetchSectionById: async (id) => {
+		const config = {
+			headers: {
+				Authorization: 'Bearer ' + localStorage.getItem('token'),
+			},
+		};
+
+		return await axios()
+			.get(`/admin/contents/sections/${id}`, config)
+			.then((r) => {
+				return r;
+			});
+	},
+
 	updateContent: async (state, data) => {
 		const config = {
 			headers: {
@@ -159,7 +173,7 @@ export default {
 			});
 	},
 
-	fetchSectionById: async (id) => {
+	deleteBook: async (state, _id) => {
 		const config = {
 			headers: {
 				Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -167,9 +181,12 @@ export default {
 		};
 
 		return await axios()
-			.get(`/admin/contents/sections/${id}`, config)
+			.delete(`/admin/contents/${_id}`, config)
 			.then((r) => {
-				return r;
+				return r.data;
+			})
+			.catch(() => {
+				state.contentError = 'Icerik Silinemedi!';
 			});
 	},
 };
