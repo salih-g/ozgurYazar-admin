@@ -58,10 +58,10 @@
 						</button>
 					</form>
 					<button
-						class="btn btn-lg btn-primary"
+						class="btn btn-lg btn-primary update"
 						@click.prevent="updateContentHandler"
 					>
-						Kitabi Guncelle
+						Kitabi güncelle
 					</button>
 					<div class="delete">
 						<button
@@ -228,23 +228,32 @@ export default {
 
 	text-align: center;
 }
-
-.delete {
-	position: absolute;
-	left: 250px;
-	bottom: 505px;
-}
 .published {
 	position: absolute;
 	right: 20px;
 	top: 75px;
 }
+
+.delete {
+	position: absolute;
+	right: 20px;
+	top: 175px;
+}
+
+.update {
+	position: absolute;
+	right: 20px;
+	top: 110px;
+}
+
 .form-check-label {
 	margin-left: 20px;
 }
+
 .title-desc {
 	text-align: left;
 }
+
 .new-section {
 	display: flex;
 	flex-direction: column;

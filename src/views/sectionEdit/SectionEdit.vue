@@ -18,7 +18,7 @@
 					class="btn btn-lg btn-primary"
 					@click.prevent="onUpdateSection()"
 				>
-					Bölümü kaydet
+					Bölümü güncelle
 				</button>
 			</div>
 			<div class="delete">
