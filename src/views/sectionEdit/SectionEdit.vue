@@ -65,6 +65,10 @@
 					<label class="col-form-label col-form-label-lg mt-4" for="desc-editor"
 						>İçerik:</label
 					>
+					<div class="col-form-label col-form-label-lg text-center">
+						Sayfa Sayısı: {{ Math.floor(words / 500) + 1 }} | Kelime:
+						{{ words }}
+					</div>
 					<textarea-autosize v-model="section.content" />
 				</div>
 			</div>
@@ -89,6 +93,11 @@ export default {
 	async created() {
 		await this.onFetchSectionById(this.$route.params.id);
 	},
+	computed: {
+		words() {
+			return this.section.content.split(' ').length - 1;
+		},
+	},
 	methods: {
 		...mapActions('content', ['updateSection', 'deleteSection']),
 
@@ -107,12 +116,6 @@ export default {
 
 		async onDeleteSection() {
 			await this.deleteSection(this.section._id).then(() => router.push('/'));
-		},
-
-		resize() {
-			let area = e.target;
-			area.style.overflow = 'hidden';
-			area.style.height = area.scrollHeight + 'px';
 		},
 	},
 };
