@@ -10,7 +10,7 @@
 
 					<small>{{ new Date(content.createdAt).toLocaleDateString() }} </small>
 				</div>
-				<div class="desc" v-html="content.desc"></div>
+				<div class="desc">{{ content.desc }}</div>
 				<small>{{ content.published ? 'Paylaşıldı' : 'Paylaşılmadı' }} </small>
 			</router-link>
 		</div>
