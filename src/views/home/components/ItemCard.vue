@@ -10,7 +10,7 @@
 
 					<small>{{ new Date(content.createdAt).toLocaleDateString() }} </small>
 				</div>
-				<p class="desc" v-html="content.desc"></p>
+				<div class="desc" v-html="content.desc"></div>
 				<small>{{ content.published ? 'Paylaşıldı' : 'Paylaşılmadı' }} </small>
 			</router-link>
 		</div>
@@ -32,6 +32,7 @@ export default {
 	font-weight: 400;
 	font-size: 18px;
 	font-family: 'Roboto Condensed', sans-serif;
+	color: white;
 
 	overflow: hidden;
 	display: -webkit-box;
