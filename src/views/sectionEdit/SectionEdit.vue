@@ -65,11 +65,7 @@
 					<label class="col-form-label col-form-label-lg mt-4" for="desc-editor"
 						>İçerik:</label
 					>
-					<VueEditor
-						class="editor"
-						id="desc-editor"
-						v-model="section.content"
-					/>
+					<textarea-autosize v-model="section.content" />
 				</div>
 			</div>
 		</div>
@@ -77,7 +73,6 @@
 </template>
 
 <script>
-import { VueEditor } from 'vue2-editor';
 import { mapActions } from 'vuex';
 
 import router from '../../router';
@@ -85,9 +80,7 @@ import api from '../../api';
 
 export default {
 	name: 'SectionEdit',
-	components: {
-		VueEditor,
-	},
+
 	data() {
 		return {
 			section: {},
@@ -114,6 +107,12 @@ export default {
 
 		async onDeleteSection() {
 			await this.deleteSection(this.section._id).then(() => router.push('/'));
+		},
+
+		resize() {
+			let area = e.target;
+			area.style.overflow = 'hidden';
+			area.style.height = area.scrollHeight + 'px';
 		},
 	},
 };
@@ -150,5 +149,15 @@ export default {
 .new-section {
 	display: flex;
 	flex-direction: column;
+}
+
+textarea {
+	width: 100%;
+	min-height: 500px;
+	padding: 20px 60px;
+	border: 2px solid !important;
+	border-radius: 4px;
+	font-size: 16px;
+	resize: none;
 }
 </style>

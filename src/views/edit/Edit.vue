@@ -38,7 +38,7 @@
 							for="desc-editor"
 							>Özet:</label
 						>
-						<VueEditor class="editor" id="desc-editor" v-model="content.desc" />
+						<textarea-autosize v-model="content.desc" />
 					</div>
 					<form class="new-section mb-4">
 						<label class="col-form-label" for="inputDefault">Bölüm ismi:</label>
@@ -154,15 +154,12 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { VueEditor } from 'vue2-editor';
 
 import router from '../../router';
 
 export default {
 	name: 'Edit',
-	components: {
-		VueEditor,
-	},
+
 	data() {
 		return {
 			content: {},
@@ -257,5 +254,17 @@ export default {
 .new-section {
 	display: flex;
 	flex-direction: column;
+}
+
+textarea {
+	width: 100%;
+	min-height: 150px;
+	padding: 20px 60px;
+	box-sizing: border-box;
+	border: 2px solid;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	font-size: 16px;
+	resize: none;
 }
 </style>
